@@ -41,8 +41,10 @@ public class IndexCreator
         new SearchField("content", SearchFieldDataType.String)
         {
             IsSearchable = true,
-            IsFilterable = true,
-            IsHidden = false,
+            IsFilterable = false,      // Viktigt: inget filter på content
+            IsSortable   = false,
+            IsFacetable  = false,
+            IsHidden     = false,
             AnalyzerName = LexicalAnalyzerName.EnLucene
         }
     };
