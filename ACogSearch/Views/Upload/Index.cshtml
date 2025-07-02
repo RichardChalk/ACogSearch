@@ -1,0 +1,30 @@
+﻿@model ACogSearch.Viewmodels.UploadViewModel
+
+<div class="container text-center mt-5">
+
+    <h2 class="mb-4">Ladda upp en textfil</h2>
+
+    <form asp-action="Index" method="post" enctype="multipart/form-data" class="mb-4">
+        <div class="d-flex flex-column align-items-center gap-3">
+            <input type="file" name="file" accept=".txt" id="fileInput" class="form-control w-50" />
+            <button type="submit" id="uploadButton" class="btn btn-primary" style="display:none;">Ladda upp</button>
+        </div>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-info w-50 mx-auto">@Html.Raw(Model.Message)</div>
+
+        <div class="mb-4">
+            <a asp-controller="Search" asp-action="Index" class="btn btn-outline-secondary">Gå till söksidan</a>
+        </div>
+    }
+
+</div>
+
+@*Används för att gömma 'upload' knappen om ingen fil är vald.*@
+<script>
+    document.getElementById("fileInput").onchange = function () {
+        document.getElementById("uploadButton").style.display = this.files.length > 0 ? "inline-block" : "none";
+    };
+</script>

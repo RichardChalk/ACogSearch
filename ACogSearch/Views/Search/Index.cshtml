@@ -1,0 +1,38 @@
+﻿@model ACogSearch.Viewmodels.SearchViewModel
+
+<div class="container text-center mt-5">
+
+    <h2>Sök i uppladdade filer</h2>
+
+    <h4 class="mt-4" style="color:green">Uppladdade filer</h4>
+    <ul class="list-group w-50 mx-auto mb-4">
+        @foreach (var file in Model.UploadedFiles)
+        {
+            <li class="list-group-item">@file.FileName</li>
+        }
+    </ul>
+
+    <form asp-action="Index" method="post">
+        <input asp-for="Query" placeholder="Söktext…" />
+        <button type="submit" class="btn btn-success">Sök</button>
+    </form>
+
+    @if (Model.Results != null && Model.Results.Any())
+    {
+        <h4>Resultat:</h4>
+        <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+            @foreach (var item in Model.Results)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.FileName</h5>
+                            <p class="card-text">@Html.Raw(item.Content)</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>
